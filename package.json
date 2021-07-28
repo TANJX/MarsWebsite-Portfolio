@@ -1,0 +1,24 @@
+{
+  "name": "marswebsite-portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node script/build.js",
+    "dev": "node script/dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TANJX/MarsWebsite-Portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TANJX/MarsWebsite-Portfolio/issues"
+  },
+  "homepage": "https://github.com/TANJX/MarsWebsite-Portfolio#readme",
+  "dependencies": {
+    "pug": "^3.0.2",
+    "sass": "^1.36.0"
+  }
+}
