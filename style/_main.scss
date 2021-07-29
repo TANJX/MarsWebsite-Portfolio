@@ -1,5 +1,13 @@
 @import "reset";
 
+$b0: #1A1A1A;
+$b1: #555;
+$b2: #999;
+
+$w2: #C6C6C6;
+$w1: #F1F1F1;
+$w0: #F5F5F5;
+
 * {
   box-sizing: border-box;
 }
@@ -22,8 +30,13 @@ body {
   width: 1024px;
 }
 
+h1, h2 {
+  color: $b0;
+}
+
 p {
   font-size: 18px;
+  color: $b0;
 }
 
 header {
@@ -34,7 +47,7 @@ header {
     justify-content: space-between;
 
     a {
-      color: black;
+      color: $b0;
       text-decoration: none;
     }
 
@@ -67,10 +80,10 @@ header {
     text-align: center;
     font-size: 18px;
     width: 100%;
-    color: #555;
+    color: $b1;
 
     &:hover {
-      color: #999;
+      color: $b2;
     }
   }
 }
@@ -101,7 +114,7 @@ header {
 
 footer {
   text-align: center;
-  color: #888;
+  color: $b2;
   margin: 130px 0;
 
   p {

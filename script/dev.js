@@ -32,15 +32,14 @@ var watcher = fw({
 watcher.add('./style');
 watcher.add('./template');
 
+console.log('Start listening\n');
+
 watcher.on('change', function (file, stat) {
-  console.log('File modified: %s', file);
   if (file === './template') {
     console.log('Compile templates');
     for (const pugFile of pugFiles) {
       console.log(`Rendering ${pugFile}.pug`);
-      const html = pug.renderFile(`./template/${pugFile}.pug`, {
-        name: 'Test'
-      });
+      const html = pug.renderFile(`./template/${pugFile}.pug`, {});
       console.log(`Writing ${pugFile}.html`);
       fs.writeFileSync(`./dist/${pugFile}.html`, html);
     }
@@ -48,10 +47,16 @@ watcher.on('change', function (file, stat) {
     console.log('Compile style');
     for (const styleFile of styleFiles) {
       console.log(`Rendering ${styleFile}.scss`);
-      const result = sass.renderSync({ file: `./style/${styleFile}.scss` });
+      const result = sass.renderSync({
+        file: `./style/${styleFile}.scss`,
+        sourceMap: true,
+        outFile: `${styleFile}.css`,
+      });
       console.log(`Writing ${styleFile}.css`);
       fs.writeFileSync(`./dist/style/${styleFile}.css`, result.css);
+      fs.writeFileSync(`./dist/style/${styleFile}.css.map`, result.map);
     }
   }
+  console.log('Updated\n');
   if (!stat) console.log('deleted');
 });
