@@ -19,6 +19,7 @@
   "homepage": "https://github.com/TANJX/MarsWebsite-Portfolio#readme",
   "dependencies": {
     "filewatcher": "^3.0.1",
+    "node-notifier": "^10.0.0",
     "pug": "^3.0.2",
     "sass": "^1.36.0"
   }
