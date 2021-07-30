@@ -2,14 +2,19 @@
 
 header {
   background-color: $w0;
- 
-  .hero {
+
+  .hero-index {
     margin-top: 200px;
     padding-bottom: 80px;
-    
+
     h1 {
       font-size: 36px;
       margin-bottom: 8px;
     }
   }
+}
+
+
+.works {
+  margin-top: 100px;
 }

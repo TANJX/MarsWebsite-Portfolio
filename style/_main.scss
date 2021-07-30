@@ -30,7 +30,8 @@ body {
   width: 1024px;
 }
 
-h1, h2 {
+h1,
+h2 {
   color: $b0;
 }
 
@@ -68,6 +69,50 @@ header {
     }
   }
 
+  .hero {
+    margin-top: 128px;
+
+    a.back-btn {
+      .left-arrow {
+        border: solid $b2;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 4px;
+        transform: rotate(135deg);
+        margin-bottom: 1px;
+      }
+
+      p {
+        margin-left: 5px;
+        display: inline-block;
+        color: $b2;
+        text-transform: uppercase;
+
+      }
+
+      &:hover {
+        .left-arrow {
+          border: solid $w2;
+          border-width: 0 3px 3px 0;
+        }
+        p {
+          color: $w2;
+        }
+      }
+
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: 36px;
+    }
+
+    p.intro {
+      margin-top: 48px;
+      line-height: 1.5;
+    }
+  }
+
 }
 
 .menu {
@@ -89,7 +134,8 @@ header {
 }
 
 .works {
-  margin-top: 100px;
+  margin-top: 160px;
+
   h2 {
     font-size: 14px;
     letter-spacing: 0.23em;
@@ -113,11 +159,12 @@ header {
 
 
 footer {
+  user-select: none;
   text-align: center;
-  color: $b2;
   margin: 130px 0;
 
   p {
     font-size: 12px;
+    color: $w2;
   }
 }
