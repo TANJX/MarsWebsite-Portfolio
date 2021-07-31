@@ -6,7 +6,14 @@ block styles
 block body
   header
     .container
-      include _bar.pug
+      .bar
+        a(href='index.html')
+          p.left
+            span.bold Mars Tan
+            span.light // Portfolio
+        p.right
+          span 中
+          span EN
       .hero-index
         h1 
           | Hi! I am 
@@ -14,9 +21,7 @@ block body
           | .
         h1 I do illustration, motion graphics, and programming.
 
-
   include _menu.pug
-  
   
   .container
     .works

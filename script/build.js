@@ -9,7 +9,6 @@ function getAllFiles(path, ext) {
     if (!file.endsWith(ext)) continue;
     files.push(file.replace(ext, ''));
   }
-
   return files;
 }
 
@@ -25,8 +24,7 @@ console.log('Start building Mars Inc.');
 console.log('Removing old files');
 
 let rmDir = function (dirPath) {
-  try { fs.readdirSync(dirPath); }
-  catch (e) { return; }
+  const files = fs.readdirSync(dirPath);
   if (files.length > 0)
     for (var i = 0; i < files.length; i++) {
       var filePath = dirPath + '/' + files[i];

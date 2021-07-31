@@ -14,6 +14,7 @@ $w0: #F5F5F5;
 
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: #fdfdfd;
 }
 
 .bold {
@@ -44,10 +45,11 @@ header {
   padding-top: 24px;
 
   .bar {
+    user-select: none;
     display: flex;
     justify-content: space-between;
 
-    a {
+    > a {
       color: $b0;
       text-decoration: none;
     }
@@ -116,12 +118,13 @@ header {
 }
 
 .menu {
-  margin-top: 40px;
+  user-select: none;
   display: grid;
-  grid-template-columns: repeat(4, 160px);
+  grid-template-columns: repeat(4, 130px);
   justify-content: center;
 
   a {
+    padding-top: 5px;
     text-align: center;
     font-size: 18px;
     width: 100%;

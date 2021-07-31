@@ -4,8 +4,6 @@ const pug = require('pug');
 const fs = require('fs');
 const fw = require('filewatcher');
 
-notifier.notify('Start Mars Inc. debugging.');
-
 function getAllFiles(path, ext) {
   const files = [];
   for (const file of fs.readdirSync(path)) {
@@ -17,10 +15,54 @@ function getAllFiles(path, ext) {
 }
 
 
-const pugFiles = getAllFiles('./template', '.pug');
-const styleFiles = getAllFiles('./style', '.scss');
+let pugFiles = getAllFiles('./template', '.pug');
+let styleFiles = getAllFiles('./style', '.scss');
+
+let errorFiles = [];
+let styleError = false;
+let pugError = false;
 
 
+function renderStyle() {
+  console.log('Compile style');
+  styleFiles = getAllFiles('./style', '.scss');
+  for (const styleFile of styleFiles) {
+    console.log(`Rendering ${styleFile}.scss`);
+    try {
+      const result = sass.renderSync({
+        file: `./style/${styleFile}.scss`,
+        sourceMap: true,
+        outFile: `${styleFile}.css`,
+      });
+      console.log(`Writing ${styleFile}.css`);
+      fs.writeFileSync(`./dist/style/${styleFile}.css`, result.css);
+      fs.writeFileSync(`./dist/style/${styleFile}.css.map`, result.map);
+    } catch (e) {
+      styleError = true;
+      errorFiles.push(`${styleFile}.scss`);
+      console.log(`Error: ${styleFile}.scss`);
+      console.log(e);
+    }
+  }
+}
+
+function renderTemplate() {
+  console.log('Compile templates');
+  pugFiles = getAllFiles('./template', '.pug');
+  for (const pugFile of pugFiles) {
+    console.log(`Rendering ${pugFile}.pug`);
+    try {
+      const html = pug.renderFile(`./template/${pugFile}.pug`, {});
+      console.log(`Writing ${pugFile}.html`);
+      fs.writeFileSync(`./dist/${pugFile}.html`, html);
+    } catch (e) {
+      pugError = true;
+      errorFiles.push(`${pugFile}.pug`);
+      console.log(`Error: ${pugFile}.pug`);
+      console.log(e);
+    }
+  }
+}
 
 var watcher = fw({
   forcePolling: false,  // try event-based watching first
@@ -30,54 +72,23 @@ var watcher = fw({
 });
 
 
+notifier.notify('Start Mars Inc. debugging.');
+
+renderStyle();
+renderTemplate();
+
 // ... or a directory
 watcher.add('./style');
 watcher.add('./template');
 
 console.log('Start listening\n');
 
-let styleError = false;
-let pugError = false;
-
 watcher.on('change', function (file, stat) {
-  const errorFiles = [];
+  errorFiles = [];
   if (file === './template') {
-    console.log('Compile templates');
-
-    for (const pugFile of pugFiles) {
-      console.log(`Rendering ${pugFile}.pug`);
-      try {
-        const html = pug.renderFile(`./template/${pugFile}.pug`, {});
-        console.log(`Writing ${pugFile}.html`);
-        fs.writeFileSync(`./dist/${pugFile}.html`, html);
-      } catch (e) {
-        pugError = true;
-        errorFiles.push(`${pugFile}.pug`);
-        console.log(`Error: ${pugFile}.pug`);
-        console.log(e);
-      }
-    }
+    renderTemplate();
   } else if (file === './style') {
-    console.log('Compile style');
-
-    for (const styleFile of styleFiles) {
-      console.log(`Rendering ${styleFile}.scss`);
-      try {
-        const result = sass.renderSync({
-          file: `./style/${styleFile}.scss`,
-          sourceMap: true,
-          outFile: `${styleFile}.css`,
-        });
-        console.log(`Writing ${styleFile}.css`);
-        fs.writeFileSync(`./dist/style/${styleFile}.css`, result.css);
-        fs.writeFileSync(`./dist/style/${styleFile}.css.map`, result.map);
-      } catch (e) {
-        styleError = true;
-        errorFiles.push(`${styleFile}.scss`);
-        console.log(`Error: ${styleFile}.scss`);
-        console.log(e);
-      }
-    }
+    renderStyle();
   }
   if (errorFiles.length > 0) {
     notifier.notify({
