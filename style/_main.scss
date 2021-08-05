@@ -1,19 +1,20 @@
 @import "reset";
+@import "responsive";
 
-$b0: #1A1A1A;
+$b0: #1a1a1a;
 $b1: #555;
 $b2: #999;
 
-$w2: #C6C6C6;
-$w1: #F1F1F1;
-$w0: #F5F5F5;
+$w2: #c6c6c6;
+$w1: #f1f1f1;
+$w0: #f5f5f5;
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #fdfdfd;
 }
 
@@ -28,7 +29,6 @@ body {
 .container {
   padding: 12px;
   margin: 0 auto;
-  width: 1024px;
 }
 
 h1,
@@ -89,7 +89,6 @@ header {
         display: inline-block;
         color: $b2;
         text-transform: uppercase;
-
       }
 
       &:hover {
@@ -101,7 +100,6 @@ header {
           color: $w2;
         }
       }
-
     }
 
     h1 {
@@ -114,7 +112,6 @@ header {
       line-height: 1.5;
     }
   }
-
 }
 
 .menu {
@@ -148,9 +145,6 @@ header {
   .works-grid {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(2, 500px);
-    grid-template-rows: repeat(2, 342px);
-    gap: 24px 24px;
 
     .work {
       background-color: #eee;
@@ -159,7 +153,6 @@ header {
     }
   }
 }
-
 
 footer {
   user-select: none;
